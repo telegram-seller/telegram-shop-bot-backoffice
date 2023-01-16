@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'cellphone',
+        'credicard'
     ];
 
     /**
@@ -30,15 +32,16 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public static function create(array $attributes)
+    {
+        $attributes["password"] = bcrypt($attributes["password"]);
+
+        $user = new self($attributes);
+
+        $user->save();
+        
+        return $user;
+    }
 }
