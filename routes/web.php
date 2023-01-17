@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\MessageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,4 +25,6 @@ Route::post("login", [AuthController::class, "login"])->name("login");
 
 Route::middleware("auth")->group(function() {
     Route::get("dashboard", [Controller::class, "dashboard"])->name("dashboard");
+
+    Route::resource("messages", MessageController::class);
 });
