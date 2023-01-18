@@ -3,7 +3,7 @@
     <h1 class="text-xl">Todas as mensagens</h1>
 
     <div class="flex flex-col w-3/4">
-        <a href="" class="bg-gray-800 w-max self-end text-white mb-3 p-2 rounded-full">Nova Mensagem</a>
+        <a href="{{ route("messages.create") }}" class="bg-gray-800 w-max self-end text-white mb-3 p-2 rounded-full">Nova Mensagem</a>
         <div class="border border-gray-300 rounded">
             <table class="w-full">
                 <thead class="border-b border-gray-300 bg-gray-100">
@@ -16,39 +16,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="px-3 text-start font-semibold">Principal</td>
-                        <td class="px-3 text-start">ir para principal</td>
-                        <td class="px-3 text-start">5</td>
-                        <td class="px-3 text-start">16/01/2022 16:29</td>
-                        <td class="px-3 text-start">
-                            <button><i class="bi bi-eye"></i></button>
-                            <button><i class="bi bi-pencil-square"></i></button>
-                            <button><i class="bi bi-trash3-fill"></i></button>
-                        </td>
-                    </tr>
-                    <tr class="bg-gray-100">
-                        <td class="px-3 text-start font-semibold">Principal</td>
-                        <td class="px-3 text-start">ir para principal</td>
-                        <td class="px-3 text-start">5</td>
-                        <td class="px-3 text-start">16/01/2022 16:29</td>
-                        <td class="px-3 text-start">
-                            <button><i class="bi bi-eye"></i></button>
-                            <button><i class="bi bi-pencil-square"></i></button>
-                            <button><i class="bi bi-trash3-fill"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="px-3 text-start font-semibold">Principal</td>
-                        <td class="px-3 text-start">ir para principal</td>
-                        <td class="px-3 text-start">5</td>
-                        <td class="px-3 text-start">16/01/2022 16:29</td>
-                        <td class="px-3 text-start">
-                            <button><i class="bi bi-eye"></i></button>
-                            <button><i class="bi bi-pencil-square"></i></button>
-                            <button><i class="bi bi-trash3-fill"></i></button>
-                        </td>
-                    </tr>
+                    @foreach ($messages as $index => $message)
+                        <tr @if ($index % 2 == 1) class="bg-gray-100" @endif>
+                            <td class="px-3 text-start font-semibold">{{ $message->name }}</td>
+                            <td class="px-3 text-start">{{ $message->button }}</td>
+                            <td class="px-3 text-start">5</td>
+                            <td class="px-3 text-start">{{ $message->formatted_created_at }}</td>
+                            <td class="px-3 text-start">
+                                <button><i class="bi bi-eye"></i></button>
+                                <button><i class="bi bi-pencil-square"></i></button>
+                                <button><i class="bi bi-trash3-fill"></i></button>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

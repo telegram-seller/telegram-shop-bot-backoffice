@@ -15,4 +15,18 @@ class MessageController extends Controller
             "messages" => $messages
         ]);
     }
+
+    public function create()
+    {
+        return view("messages.create");
+    }
+
+    public function store(Request $request)
+    {
+        $data = $request->all();
+
+        $message = Message::create($data);
+
+        return redirect()->route("messages.index");
+    }
 }

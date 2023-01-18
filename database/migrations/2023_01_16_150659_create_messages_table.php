@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('messages', function (Blueprint $table) {
-            $table->uuid();
+            $table->uuid("id");
             $table->string("name", 40);
             $table->text("content");
             $table->string("slug", 40);

@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Ramsey\Uuid\Uuid;
 
 class CreateInitialUser extends Seeder
 {
@@ -16,10 +15,7 @@ class CreateInitialUser extends Seeder
      */
     public function run()
     {
-        $user_id = Uuid::uuid1();        ;
-
         $attributes = [
-            "id"        => $user_id,
             "name"      => "Initial User",
             "email"     => "initial-user@email.com",
             "password"  => "12345678",
@@ -27,7 +23,7 @@ class CreateInitialUser extends Seeder
             "credicard" => "1234-1234-1234-1234"
         ];
 
-        $user = User::query()->find($user_id);
+        $user = User::query()->where("email", "initial-user@email.com")->first();
 
         if ($user == null) {
             $user = User::create($attributes);
