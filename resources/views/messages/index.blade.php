@@ -10,7 +10,6 @@
                     <tr>
                         <th class="px-3 text-start">Nome</th>
                         <th class="px-3 text-start">Botão</th>
-                        <th class="px-3 text-start">Redirecionamentos</th>
                         <th class="px-3 text-start">Criada Em</th>
                         <th class="px-3 text-start">Ações</th>
                     </tr>
@@ -20,12 +19,19 @@
                         <tr @if ($index % 2 == 1) class="bg-gray-100" @endif>
                             <td class="px-3 text-start font-semibold">{{ $message->name }}</td>
                             <td class="px-3 text-start">{{ $message->button }}</td>
-                            <td class="px-3 text-start">5</td>
                             <td class="px-3 text-start">{{ $message->formatted_created_at }}</td>
                             <td class="px-3 text-start">
-                                <button><i class="bi bi-eye"></i></button>
-                                <button><i class="bi bi-pencil-square"></i></button>
-                                <button><i class="bi bi-trash3-fill"></i></button>
+                                <a href="{{ route("messages.show", $message->id) }}">
+                                    <button><i class="bi bi-eye"></i></button>
+                                </a>
+                                <a href="{{ route("messages.edit", $message->id) }}">
+                                    <button><i class="bi bi-pencil-square"></i></button>
+                                </a>
+                                <form method="POST" action="{{ route("messages.destroy", $message->id) }}">
+                                    @csrf
+                                    @method("DELETE")
+                                    <button><i class="bi bi-trash3-fill"></i></button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
