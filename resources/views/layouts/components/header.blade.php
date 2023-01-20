@@ -6,19 +6,20 @@
                 <i class="bi bi-caret-down-fill text-sm rotate-180" id="arrow"></i>
             </div>
             <div class="bg-gray-900 pb-3 text-white flex flex-col items-end" id="submenu">
-                <a href="#" class="text-red flex items-center px-8 pt-1">
+                <a href="{{ route("myProfile") }}" class="text-red flex items-center px-8 pt-1">
                     <i class="bi bi-person-fill text-sm"></i>
                     <h4 class="px-2">Meus Dados</h4>
                 </a>
-                <a href="#" class="text-red flex items-center px-8 pt-1">
-                    <i class="bi bi-box-arrow-in-right text-sm"></i>
-                    <h4 class="px-2">Logout</h4>
-                </a>
+                <form action="{{ route("logout") }}" method="post">
+                    @csrf
+                    <div class="text-red flex items-center px-8 pt-1">
+                        <i class="bi bi-box-arrow-in-right text-sm"></i>
+                        <button class="px-2">Logout</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-    {{-- <div class="h-[calc(100vh-50px)] bg-white">
-    </div> --}}
 </div>
 
 <script type="text/javascript">

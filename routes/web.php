@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +26,8 @@ Route::post("login", [AuthController::class, "login"])->name("login");
 
 Route::middleware("auth")->group(function() {
     Route::get("dashboard", [Controller::class, "dashboard"])->name("dashboard");
-
+    Route::get("my-profile", [UserController::class, "myProfile"])->name("myProfile");
+    Route::put("update-user", [UserController::class, "updateUser"])->name("updateUser");
+    Route::post("logout", [AuthController::class, "logout"])->name("logout");
     Route::resource("messages", MessageController::class);
 });
