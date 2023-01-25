@@ -30,4 +30,6 @@ Route::middleware("auth")->group(function() {
     Route::put("update-user", [UserController::class, "updateUser"])->name("updateUser");
     Route::post("logout", [AuthController::class, "logout"])->name("logout");
     Route::resource("messages", MessageController::class);
+    Route::get("messages/{id}/secondary-messages", [MessageController::class, "editSecondaryMessages"])->name("messages.editSecondaryMessages");
+    Route::put("messages/{id}/secondary-messages", [MessageController::class, "updateSecondaryMessages"])->name("messages.updateSecondaryMessages");
 });

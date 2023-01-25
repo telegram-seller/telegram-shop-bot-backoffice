@@ -49,4 +49,9 @@ class Message extends Model
 
         parent::update($attributes, $options);
     }
+
+    public function secondaryMessages()
+    {
+        return $this->belongsToMany(Message::class, "messages_messages", "primary_message", "secondary_message", "id", "id");
+    }
 }

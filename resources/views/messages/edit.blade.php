@@ -6,9 +6,13 @@
         </div>
         <br>
         <div class="border border-blac p-3 shadow-md bg-gray-50">
-            <form action="{{ route("messages.update", $message->id) }}" method="post">
+            <form action="{{ route("messages.update", $message->id) }}" method="post" class="flex flex-col gap-y-4">
                 @csrf
                 @method("PUT")
+                <div class="self-end mt-2">
+                    <a href="{{ route("messages.editSecondaryMessages", $message->id) }}" class="bg-gray-800 w-max self-end text-white mb-3 p-2 rounded-full">Vincular mensagens</a>
+                </div>
+                <hr>
                 <div class="flex flex-wrap  gap-y-4 gap-x-5">
                     <div class="flex flex-col w-[436px]">
                         <label for="name">Nome *</label>

@@ -66,4 +66,29 @@ class MessageController extends Controller
 
         return redirect()->route("messages.index");
     }
+
+    public function editSecondaryMessages(string $id)
+    {
+        $message = Message::query()->find($id);
+
+        $secondaryMessages = Message::query()->where("id", "!=", $id)->get();
+
+        return view("messages.link",[
+            "message" => $message,
+            "secondaryMessages" => $secondaryMessages
+        ]);
+    }
+
+    public function updateSecondaryMessages(Request $request, string $id)
+    {
+        $secondaryMessages = $request->input("messages");
+
+        $secondaryMessages = array_keys($secondaryMessages);
+
+        $primaryMessage = Message::query()->find($id);
+
+        $primaryMessage->secondaryMessages()->sync($secondaryMessages);
+
+        return redirect()->route("messages.index");
+    }
 }

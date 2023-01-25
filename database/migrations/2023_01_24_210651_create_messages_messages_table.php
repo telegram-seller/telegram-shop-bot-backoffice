@@ -13,13 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('messages', function (Blueprint $table) {
-            $table->uuid("id")->primary();
-            $table->string("name", 40);
-            $table->text("content");
-            $table->string("slug", 40);
-            $table->string("button", 40);
-            $table->timestamps();
+        Schema::create('messages_messages', function (Blueprint $table) {
+            $table->foreignUuid("primary_message")->constrained("messages", "id");
+            $table->foreignUuid("secondary_message")->constrained("messages", "id");
+
+            $table->primary(["primary_message", "secondary_message"]);
         });
     }
 
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('messages');
+        Schema::dropIfExists('messages_messages');
     }
 };
